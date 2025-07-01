@@ -25,8 +25,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
       <aside
-        className={`fixed z-30 top-0 left-0 h-screen transition-transform duration-300 bg-primary text-white w-64 flex flex-col ${open ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:static md:w-64 md:h-screen`}
-        style={{ background: "var(--primary)" }}
+        className={`fixed z-30 top-0 left-0 h-screen w-64 transition-transform duration-300 bg-primary text-white flex flex-col ${open ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:static md:w-64 md:h-screen`}
+        style={{ background: "var(--primary)", position: 'fixed', overflow: 'hidden' }}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
           <span className="font-bold text-xl tracking-tight">Dashboard</span>
@@ -34,7 +34,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <FiX size={24} />
           </button>
         </div>
-        <nav className="flex-1 flex flex-col gap-2 p-4">
+        <nav className="flex-1 flex flex-col gap-2 p-4 overflow-y-auto">
           {sidebarItems.map(item => (
             <Link
               key={item.href}
@@ -60,7 +60,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       )}
       {/* Main content */}
       <div className="flex-1 min-h-screen ml-0 md:ml-64 transition-all duration-300">
-        <header className="md:hidden flex items-center px-4 py-3 bg-primary text-white fixed top-0 left-0 right-0 z-20" style={{ background: "var(--primary)" }}>
+        <header className="md:hidden flex items-center px-4 py-3 bg-primary text-black fixed top-0 left-0 right-0 z-20" style={{ background: "var(--primary)" }}>
           <button onClick={() => setOpen(true)}>
             <FiMenu size={28} />
           </button>

@@ -102,14 +102,14 @@ export default function SignupForm() {
       {popup && (
         <div className={`p-3 rounded text-center mb-2 ${popup.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>{popup.message}</div>
       )}
-      <form className="flex flex-col gap-4 text-black" onSubmit={handleSubmit}>
+      <form className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black" onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
           placeholder="Full Name"
           value={form.name}
           onChange={handleChange}
-          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
+          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary col-span-1"
           required
         />
         <input
@@ -118,7 +118,7 @@ export default function SignupForm() {
           placeholder="Email"
           value={form.email}
           onChange={handleChange}
-          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
+          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary col-span-1"
           required
         />
         <input
@@ -127,7 +127,7 @@ export default function SignupForm() {
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
-          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
+          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary col-span-1"
           required
         />
         <input
@@ -137,14 +137,14 @@ export default function SignupForm() {
           value={form.age}
           onChange={handleChange}
           min={0}
-          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
+          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary col-span-1"
           required
         />
         <select
           name="gender"
           value={form.gender}
           onChange={handleChange}
-          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
+          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary col-span-1"
           required
         >
           <option value="">Select Gender</option>
@@ -157,7 +157,7 @@ export default function SignupForm() {
           placeholder="Country"
           value={form.country}
           onChange={handleChange}
-          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
+          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary col-span-1"
           required
         />
         <input
@@ -166,7 +166,7 @@ export default function SignupForm() {
           placeholder="City"
           value={form.city}
           onChange={handleChange}
-          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
+          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary col-span-1"
           required
         />
         <input
@@ -175,27 +175,27 @@ export default function SignupForm() {
           placeholder="Profile Picture URL"
           value={form.profilePicture}
           onChange={handleChange}
-          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
+          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary col-span-1 md:col-span-2"
         />
         <input
           type="text"
           placeholder="Association Name"
           value={form.associationData.name}
           onChange={handleAssociationNameChange}
-          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary col-span-1 md:col-span-2"
           required
         />
         <textarea
           placeholder="Association Description"
           value={form.associationData.description}
           onChange={handleAssociationDescriptionChange}
-          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+          className="px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary resize-none col-span-1 md:col-span-2"
           rows={3}
           required
         />
         <button
           type="submit"
-          className="w-full py-3 rounded bg-secondary text-white font-semibold hover:bg-opacity-90 transition disabled:opacity-60"
+          className="w-full py-3 rounded bg-secondary text-white font-semibold hover:bg-opacity-90 transition disabled:opacity-60 col-span-1 md:col-span-2"
           disabled={loading}
         >
           {loading ? 'Signing up...' : 'Signup'}
