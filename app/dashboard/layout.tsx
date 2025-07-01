@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FiBarChart2, FiClipboard, FiFileText, FiLogOut, FiMenu, FiX } from "react-icons/fi";
 import Cookies from "js-cookie";
+import AssociationOwnerStats from "./general_stats/AssociationOwnerStats";
 
 const sidebarItems = [
   { name: "General Stats", href: "/dashboard/general_stats", icon: <FiBarChart2 /> },
@@ -11,14 +12,40 @@ const sidebarItems = [
   { name: "Applys", href: "/dashboard/applys", icon: <FiFileText /> },
 ];
 
+// Add a simple JWT decode utility
+function parseJwt(token: string) {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch {
+    return null;
+  }
+}
+
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
+  const [role, setRole] = useState<string | null>(null);
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      const payload = parseJwt(token);
+      setRole(payload?.role || null);
+    } else {
+      setRole(null);
+      router.replace("/auth");
+    }
+  }, [router]);
 
   function handleLogout() {
     Cookies.remove("token");
     router.replace("/auth");
+  }
+
+  // Prevent hydration mismatch: don't render until role is known
+  if (role === null) {
+    return null; // or a loading spinner
   }
 
   return (
@@ -66,7 +93,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </button>
           <span className="ml-4 font-bold text-lg">Dashboard</span>
         </header>
-        <main className="p-6 pt-16 md:pt-6">{children}</main>
+        <main className="p-6 pt-16 md:pt-6">
+          {role === 'admin' ? (
+            children
+          ) : role === 'associationOwner' ? (
+            <AssociationOwnerStats />
+          ) : (
+            <div className="flex flex-col items-center justify-center h-full text-center">
+              <h2 className="text-2xl font-bold text-red-600 mb-4">You are not an admin.</h2>
+              <p className="text-gray-600">Access to the dashboard is restricted. We will add more features for non-admins soon.</p>
+            </div>
+          )}
+        </main>
       </div>
     </div>
   );

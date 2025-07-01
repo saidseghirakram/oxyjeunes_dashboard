@@ -62,9 +62,7 @@ export default function LoginForm() {
           sameSite: "Strict",
         });
         setPopup({ type: 'success', message: 'Login successful! Redirecting...' });
-        setTimeout(() => {
-          router.replace("/dashboard");
-        }, 1000);
+        router.replace("/dashboard");
       } else {
         setPopup({ type: 'error', message: (res as { errors?: unknown }).errors?.toString() || 'Login failed.' });
       }
