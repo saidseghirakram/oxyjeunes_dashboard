@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FiBarChart2, FiClipboard, FiFileText, FiLogOut, FiMenu, FiX } from "react-icons/fi";
 import Cookies from "js-cookie";
-import AssociationOwnerStats from "./general_stats/AssociationOwnerStats";
 
 const sidebarItems = [
   { name: "General Stats", href: "/dashboard/general_stats", icon: <FiBarChart2 /> },
@@ -94,10 +93,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <span className="ml-4 font-bold text-lg">Dashboard</span>
         </header>
         <main className="p-6 pt-16 md:pt-6">
-          {role === 'admin' ? (
+          {(role === 'admin' || role === 'associationOwner') ? (
             children
-          ) : role === 'associationOwner' ? (
-            <AssociationOwnerStats />
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-center">
               <h2 className="text-2xl font-bold text-red-600 mb-4">You are not an admin.</h2>
