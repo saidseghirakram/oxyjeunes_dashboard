@@ -1,6 +1,6 @@
 import React from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Legend } from "recharts";
-import { FaRegStar, FaClipboardList, FaUserFriends, FaTasks, FaCheckCircle } from "react-icons/fa";
+import { ResponsiveContainer, Cell, PieChart, Pie } from "recharts";
+import { FaRegStar, FaClipboardList, FaUserFriends, FaTasks } from "react-icons/fa";
 
 const dummyData = {
   totalPlans: 1,
@@ -81,7 +81,7 @@ function AppStatusDonut() {
               stroke="none"
               label={false}
             >
-              {appStatusData.map((entry, i) => (
+              {appStatusData.map((entry) => (
                 <Cell key={entry.name} fill={entry.color} />
               ))}
             </Pie>
@@ -120,20 +120,6 @@ function Timeline() {
           </li>
         ))}
       </ul>
-    </div>
-  );
-}
-
-function AcceptedCard({ value }: { value: number }) {
-  return (
-    <div className="flex items-center gap-4 bg-green-50 border border-green-200 rounded-xl shadow p-4 min-w-[220px]">
-      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-green-100">
-        <FaCheckCircle className="text-green-500 text-2xl" />
-      </div>
-      <div>
-        <div className="text-2xl font-bold text-green-700">{value}</div>
-        <div className="text-xs text-green-600 font-semibold uppercase tracking-wide">Accepted</div>
-      </div>
     </div>
   );
 }
